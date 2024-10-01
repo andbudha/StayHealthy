@@ -21,7 +21,7 @@ export enum FormFieldType {
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // 1. Define your form.
+
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
@@ -31,10 +31,7 @@ const PatientForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof UserFormValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values);
   }
   return (
