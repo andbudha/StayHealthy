@@ -15,6 +15,8 @@ import { Input } from '@/components/ui/input';
 import { Control } from 'react-hook-form';
 import { FormFieldType } from './forms/PatientForm';
 import Image from 'next/image';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 type CustomProps = {
   control: Control<any>;
@@ -28,11 +30,18 @@ type CustomProps = {
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
-  renderSkeleton?: (filed: any) => React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
 };
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  const { iconSrc, iconAlt, fieldType, placeholder } = props;
+  const {
+    iconSrc,
+    iconAlt,
+    fieldType,
+    placeholder,
+    showTimeSelect,
+    dateFormat,
+  } = props;
   switch (fieldType) {
     case FormFieldType.INPUT:
       return (
@@ -68,6 +77,28 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             onChange={field.onChange}
           />
         </FormControl>
+      );
+    case FormFieldType.DATE_PICKER:
+      return (
+        <div className="flex rounded-md border border-dark-500 bg-dark-400">
+          <Image
+            src="/assets/icons/calendar.svg"
+            alt="calendar"
+            height={24}
+            width={24}
+            className="ml-2"
+          />
+          <FormControl>
+            <DatePicker
+              selected={field.value}
+              onChange={(date) => field.onChange(date)}
+              dateFormat={dateFormat ?? 'MM/dd/yyyy'}
+              showTimeSelect={showTimeSelect ?? false}
+              timeInputLabel="Time:"
+              className="date-picker"
+            />
+          </FormControl>
+        </div>
       );
 
     default:
