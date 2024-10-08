@@ -198,6 +198,22 @@ const RegisterForm = ({ user }: { user: User }) => {
               placeholder="Medical Insurance Number"
             />
           </div>{' '}
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.TEXTAREA}
+              name="allergies"
+              label="Allergies"
+              placeholder="Allergies( if any )"
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.TEXTAREA}
+              name="currentMedication"
+              label="Current Medication"
+              placeholder="Current Medication ( if any )"
+            />
+          </div>
           <div className="flex flex-col gap-6 xl:flex-row"></div>
           <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
         </form>
