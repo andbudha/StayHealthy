@@ -145,7 +145,7 @@ const RegisterForm = ({ user }: { user: User }) => {
               fieldType={FormFieldType.INPUT}
               name="emergencyContactName"
               label="Emergency Contact Name"
-              placeholder="Your Emergency Contact Name"
+              placeholder="Emergency Contact Name"
             />
             <CustomFormField
               control={form.control}
@@ -182,8 +182,22 @@ const RegisterForm = ({ user }: { user: User }) => {
               </SelectItem>
             ))}
           </CustomFormField>
-          <div className="flex flex-col gap-6 xl:flex-row"></div>{' '}
-          <div className="flex flex-col gap-6 xl:flex-row"></div>{' '}
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              name="insuranceProvider"
+              label="Medical Insurance"
+              placeholder="Medical Insurance"
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.INPUT}
+              name="insurancePolicyNumber"
+              label="Medical Insurance Number"
+              placeholder="Medical Insurance Number"
+            />
+          </div>{' '}
           <div className="flex flex-col gap-6 xl:flex-row"></div>
           <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
         </form>
