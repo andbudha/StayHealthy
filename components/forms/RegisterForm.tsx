@@ -214,7 +214,22 @@ const RegisterForm = ({ user }: { user: User }) => {
               placeholder="Current Medication ( if any )"
             />
           </div>
-          <div className="flex flex-col gap-6 xl:flex-row"></div>
+          <div className="flex flex-col gap-6 xl:flex-row">
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.TEXTAREA}
+              name="pastMedicalHistory"
+              label="Past Medical History"
+              placeholder="Past Medical History..."
+            />
+            <CustomFormField
+              control={form.control}
+              fieldType={FormFieldType.TEXTAREA}
+              name="familyMedicalHistory"
+              label="Family Medical History"
+              placeholder="Family Medical History..."
+            />
+          </div>
           <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
         </form>
       </Form>
