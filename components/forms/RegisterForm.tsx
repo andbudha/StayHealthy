@@ -155,6 +155,33 @@ const RegisterForm = ({ user }: { user: User }) => {
               placeholder="+(012) 345-678"
             />
           </div>
+          <section className="space-y-6">
+            <div className="mb-9 space-y-1">
+              <h2 className="sub-header">Medical Information.</h2>
+            </div>
+          </section>
+          <CustomFormField
+            control={form.control}
+            fieldType={FormFieldType.SELECT}
+            name="primaryPhysician"
+            label="Primary Physician"
+            placeholder="Select a Physician"
+          >
+            {Doctors.map((doctor) => (
+              <SelectItem key={doctor.name} value={doctor.name}>
+                <div className="flex cursor-pointer items-center gap-2">
+                  <Image
+                    src={doctor.image}
+                    width={32}
+                    height={32}
+                    alt={doctor.name}
+                    className="rounded-full border border-dark-500"
+                  />
+                  <p>{doctor.name}</p>
+                </div>
+              </SelectItem>
+            ))}
+          </CustomFormField>
           <div className="flex flex-col gap-6 xl:flex-row"></div>{' '}
           <div className="flex flex-col gap-6 xl:flex-row"></div>{' '}
           <div className="flex flex-col gap-6 xl:flex-row"></div>
