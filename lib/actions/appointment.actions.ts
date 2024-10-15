@@ -18,3 +18,16 @@ export const createAppointment = async (
     console.log('Creating Appointment Error:::', error);
   }
 };
+
+export const getAppointment = async (appointmentId: string) => {
+  try {
+    const appointment = await databases.getDocument(
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENTS_COLLECTION_ID!,
+      appointmentId
+    );
+    return appointment;
+  } catch (error) {
+    console.log('GETTING APPOINTMENT ERROR:::', error);
+  }
+};
