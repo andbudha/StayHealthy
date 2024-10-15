@@ -66,7 +66,6 @@ const AppointmentForm = ({ type, userId, patientId }: AppointmentFormProps) => {
           note: values.note,
           status: status as Status,
         };
-        console.log('Submitting appoinmtent values:::', appointmentData);
         const appointment = await createAppointment(appointmentData);
         if (appointment) {
           form.reset();

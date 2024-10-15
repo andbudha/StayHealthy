@@ -7,8 +7,6 @@ import React from 'react';
 
 const NewAppointment = async ({ params: { userId } }: SearchParamProps) => {
   const patient = await getPatient(userId);
-  console.log('UserId in NewAppointment::::', userId);
-  console.log('PatientId in NewAppointment::::', patient.$id);
 
   return (
     <div className="flex h-screen max-h-screen">
