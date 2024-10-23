@@ -1,11 +1,9 @@
 'use client';
 import 'react-phone-number-input/style.css';
-import PhoneInput, { type Value } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
 import { E164Number } from 'libphonenumber-js/core';
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,

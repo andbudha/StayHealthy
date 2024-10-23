@@ -67,6 +67,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         router.push(`/patients/${user.$id}/new-appointment`);
       }
     } catch (error) {
+      console.log('ON-SUBMITTING REGISTER FORM VALUES ERROR::::', error);
     } finally {
       setIsLoading(false);
     }

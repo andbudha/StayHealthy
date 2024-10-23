@@ -40,7 +40,7 @@ const PasskeyModal = () => {
         setOpenModal(true);
       }
     }
-  }, [encryptedKey]);
+  }, [encryptedKey, path, router]);
 
   const closeModalHandler = () => {
     setOpenModal(false);

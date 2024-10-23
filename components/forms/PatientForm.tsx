@@ -47,6 +47,7 @@ const PatientForm = () => {
         router.push(`/patients/${newUser.$id}/register`);
       }
     } catch (error) {
+      console.log('ON-SUBMITTING PATIENT FORM VALUES ERROR::::', error);
     } finally {
       setIsLoading(false);
     }

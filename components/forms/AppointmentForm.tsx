@@ -23,7 +23,7 @@ type AppointmentFormProps = {
   type: 'create' | 'cancel' | 'schedule';
   userId: string;
   patientId: string;
-  setOpen: (open: boolean) => void;
+  setOpen?: (open: boolean) => void;
   appointment?: Appointment;
 };
 const AppointmentForm = ({
