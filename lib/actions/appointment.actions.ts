@@ -3,6 +3,7 @@ import { ID, Query } from 'node-appwrite';
 import { databases } from '../appwrite.config';
 import { parseStringify } from '../utils';
 import { Appointment } from '@/types/appwrite.types';
+import { revalidatePath } from 'next/cache';
 
 export const createAppointment = async (
   appointment: CreateAppointmentParams
@@ -16,7 +17,7 @@ export const createAppointment = async (
     );
     return parseStringify(newAppointment);
   } catch (error) {
-    console.log('Creating Appointment Error:::', error);
+    console.log('CREATING APPOINTMENT ERROR:::', error);
   }
 };
 
@@ -37,8 +38,8 @@ export const getRecentAppontmentList = async () => {
   try {
     const appointments = await databases.listDocuments(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
-      process.env.NEXT_PUBLIC_APPOINTMENTS_COLLECTION_ID!,
-      [Query.orderDesc('$createdAt')]
+      process.env.NEXT_PUBLIC_APPOINTMENTS_COLLECTION_ID!
+      // [Query.orderDesc('$createdAt')]
     );
     const initialCounts = {
       scheduledCount: 0,
@@ -48,12 +49,16 @@ export const getRecentAppontmentList = async () => {
 
     const counts = (appointments.documents as Appointment[]).reduce(
       (acc, appointment) => {
-        if (appointment.status === 'scheduled') {
-          acc.scheduledCount += 1;
-        } else if (appointment.status === 'pending') {
-          acc.pendingCount += 1;
-        } else if (appointment.status === 'cancelled') {
-          acc.cancelledCount += 1;
+        switch (appointment.status) {
+          case 'scheduled':
+            acc.scheduledCount++;
+            break;
+          case 'pending':
+            acc.pendingCount++;
+            break;
+          case 'cancelled':
+            acc.cancelledCount++;
+            break;
         }
         return acc;
       },
@@ -69,5 +74,30 @@ export const getRecentAppontmentList = async () => {
     return parseStringify(data);
   } catch (error) {
     console.log('GETTING RECENT APPOINTMENT LIST:::', error);
+  }
+};
+
+export const updateAppointment = async ({
+  appointmentId,
+  userId,
+  appointment,
+  type,
+}: UpdateAppointmentParams) => {
+  try {
+    const updatedAppointment = await databases.updateDocument(
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENTS_COLLECTION_ID!,
+      appointmentId,
+      appointment
+    );
+    if (!updatedAppointment) {
+      throw new Error('Appointment not found!');
+    }
+
+    //SMS notification
+    revalidatePath('/admin');
+    return parseStringify(updatedAppointment);
+  } catch (error) {
+    console.log('UPDATING APPOINTMENT ERROR:::', error);
   }
 };
